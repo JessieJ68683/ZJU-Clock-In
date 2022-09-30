@@ -8,7 +8,7 @@ import re
 import datetime
 import time
 import sys
-import ddddocr
+# import ddddocr
 
 
 class ClockIn(object):
@@ -34,7 +34,7 @@ class ClockIn(object):
         self.username = username
         self.password = password
         self.sess = requests.Session()
-        self.ocr = ddddocr.DdddOcr()
+#         self.ocr = ddddocr.DdddOcr()
 
     def login(self):
         """Login to ZJU platform"""
@@ -117,7 +117,7 @@ class ClockIn(object):
         new_info['jcqzrq'] = ""
         new_info['gwszdd'] = ""
         new_info['szgjcs'] = ""
-        new_info['verifyCode'] = self.get_captcha()
+#         new_info['verifyCode'] = self.get_captcha()
 
         # 2021.08.05 Fix 2
         magics = re.findall(r'"([0-9a-f]{32})":\s*"([^\"]+)"', html)
@@ -189,11 +189,11 @@ def main(username, password):
             print(res['m'])
             if res['m'].find("已经") != -1: # 已经填报过了 不报错
                 pass
-            elif res['m'].find("验证码错误") != -1: # 验证码错误
-                print('再次尝试')
-                time.sleep(5)
-                main(username, password)
-                pass
+#             elif res['m'].find("验证码错误") != -1: # 验证码错误
+#                 print('再次尝试')
+#                 time.sleep(5)
+#                 main(username, password)
+#                 pass
             else:
                 raise Exception
     except Exception:
